@@ -3,6 +3,7 @@ const { createApp } = Vue;
 createApp ({
     data() {
         return {
+            todo: 0,
             todos: [
                 {
                     text: 'Fare i compiti',
@@ -20,7 +21,9 @@ createApp ({
         }
     },
     methods: {
-
+        deleteItem (itemIndex) {
+            this.todos.splice(itemIndex, 1);
+        }
     },
     mounted() {
 

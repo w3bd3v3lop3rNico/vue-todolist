@@ -12,8 +12,23 @@
 		referrerpolicy="no-referrer"
 	/>
     <script src="https://unpkg.com/vue@3"></script>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body id="app">
+    <div class="container">
+        <h1 class="title">Todo list</h1>
+        <div class="add-todo-items">
+            <input type="text" placeholder="inserisci un elemento">
+            <button>Salva nella lista</button>
+        </div>
+        <ul class="todo-list">
+            <li class="todo-item" v-for="(todo, index) in todos" :key="index">
+                {{ todo.text }}
+                <i class="fa-solid fa-xmark" @click.stop="deleteItem(index)"></i>
+            </li>
+        </ul>
+
+    </div>
     <script src="./js/script.js"></script>
 </body>
 </html>
