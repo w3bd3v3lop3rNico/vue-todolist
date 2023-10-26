@@ -1,34 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link
-		rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-		integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-		crossorigin="anonymous"
-		referrerpolicy="no-referrer"
-	/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://unpkg.com/vue@3"></script>
     <link rel="stylesheet" href="./css/style.css">
 </head>
-<body id="app">
-    <div class="container">
-        <h1 class="title">Todo list</h1>
-        <div class="add-todo-items">
-            <input type="text" placeholder="inserisci un elemento">
-            <button>Salva nella lista</button>
-        </div>
-        <ul class="todo-list">
-            <li class="todo-item" v-for="(todo, index) in todos" :key="index">
-                {{ todo.text }}
-                <i class="fa-solid fa-xmark" @click.stop="deleteItem(index)"></i>
-            </li>
-        </ul>
 
+<body>
+    <div id="app">
+        <div class="container">
+            <h1 class="title">Todo list</h1>
+            <div class="add-todo-items">
+                <input type="text" placeholder="inserisci un elemento" v-model="newTodo.text">
+                <button @click="addItem()">Salva nella lista</button>
+                <div>Inserisci almeno 5 caratteri</div>
+                
+            </div>
+            <div v-if="todos.length > 0">
+                <ul class="todo-list">
+                    <li class="todo-item" 
+                    :class="todo.done === true ? 'done' : ''" 
+                    v-for="(todo, index) in todos" :key="index"
+                    @click="doneItem(index, todo.done)">
+                        {{ todo.text }}
+                        <i class="fa-solid fa-xmark" @click.stop="deleteItem(index, 'Pippo')"></i>
+                    </li>
+                </ul>   
+            </div>
+            <div v-else>
+                Non ci sono elementi nella lista
+            </div>
+
+            
+
+        </div>
     </div>
     <script src="./js/script.js"></script>
 </body>
+
 </html>
